@@ -216,7 +216,7 @@ Phaser.Sound = function (game, key, volume, loop, connect)
             this.gainNode = this.context.createGain();
         }
 
-        this.gainNode.gain.value = volume;
+        this.gainNode.gain.setValueAtTime(volume, 0);
 
         if (connect)
         {
@@ -1227,7 +1227,7 @@ Object.defineProperty(Phaser.Sound.prototype, 'mute', {
 
             if (this.usingWebAudio)
             {
-                this.gainNode.gain.value = 0;
+                this.gainNode.gain.setValueAtTime(0, 0);
             }
             else if (this.usingAudioTag && this._sound)
             {
@@ -1240,7 +1240,7 @@ Object.defineProperty(Phaser.Sound.prototype, 'mute', {
 
             if (this.usingWebAudio)
             {
-                this.gainNode.gain.value = this._muteVolume;
+                this.gainNode.gain.setValueAtTime(this._muteVolume, 0);
             }
             else if (this.usingAudioTag && this._sound)
             {
@@ -1285,7 +1285,7 @@ Object.defineProperty(Phaser.Sound.prototype, 'volume', {
 
         if (this.usingWebAudio)
         {
-            this.gainNode.gain.value = value;
+            this.gainNode.gain.setValueAtTime(value, 0);
         }
         else if (this.usingAudioTag && this._sound)
         {
