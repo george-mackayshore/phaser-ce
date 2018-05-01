@@ -7,7 +7,7 @@
 *
 * Phaser - http://phaser.io
 *
-* v2.10.3 "2018-03-22" - Built: Thu Mar 22 2018 10:07:08
+* v2.10.3-gms "2018-03-22" - Built: Tue May 01 2018 15:18:31
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -65574,7 +65574,7 @@ Phaser.Sound = function (game, key, volume, loop, connect) {
             this.gainNode = this.context.createGain();
         }
 
-        this.gainNode.gain.value = volume;
+        this.gainNode.gain.setValueAtTime(volume, 0);
 
         if (connect)
         {
@@ -66574,7 +66574,7 @@ Object.defineProperty(Phaser.Sound.prototype, "mute", {
 
             if (this.usingWebAudio)
             {
-                this.gainNode.gain.value = 0;
+                this.gainNode.gain.setValueAtTime(0, 0);
             }
             else if (this.usingAudioTag && this._sound)
             {
@@ -66587,7 +66587,7 @@ Object.defineProperty(Phaser.Sound.prototype, "mute", {
 
             if (this.usingWebAudio)
             {
-                this.gainNode.gain.value = this._muteVolume;
+                this.gainNode.gain.setValueAtTime(this._muteVolume, 0);
             }
             else if (this.usingAudioTag && this._sound)
             {
@@ -66630,7 +66630,7 @@ Object.defineProperty(Phaser.Sound.prototype, "volume", {
 
         if (this.usingWebAudio)
         {
-            this.gainNode.gain.value = value;
+            this.gainNode.gain.setValueAtTime(value, 0);
         }
         else if (this.usingAudioTag && this._sound)
         {
@@ -66902,7 +66902,7 @@ Phaser.SoundManager.prototype = {
                 this.masterGain = this.context.createGain();
             }
 
-            this.masterGain.gain.value = 1;
+            this.masterGain.gain.setValueAtTime(1, 0);
             this.masterGain.connect(this.context.destination);
 
             // A suspended context is actually normal (momentarily) in Firefox.
@@ -67379,7 +67379,7 @@ Phaser.SoundManager.prototype = {
         if (this.usingWebAudio)
         {
             this._muteVolume = this.masterGain.gain.value;
-            this.masterGain.gain.value = 0;
+            this.masterGain.gain.setValueAtTime(0, 0);
         }
 
         //  Loop through sounds
@@ -67412,7 +67412,7 @@ Phaser.SoundManager.prototype = {
 
         if (this.usingWebAudio)
         {
-            this.masterGain.gain.value = this._muteVolume;
+            this.masterGain.gain.setValueAtTime(this._muteVolume, 0);
         }
 
         //  Loop through sounds
@@ -67530,7 +67530,7 @@ Object.defineProperty(Phaser.SoundManager.prototype, "volume", {
 
             if (this.usingWebAudio)
             {
-                this.masterGain.gain.value = value;
+                this.masterGain.gain.setValueAtTime(value, 0);
             }
             else
             {
